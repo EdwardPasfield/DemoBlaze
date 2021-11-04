@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-11-04T21:33:36.192Z",
+    "end": "2021-11-04T21:33:49.298Z",
+    "duration": 13106,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "8e26840b-e139-408f-addc-b8ff6e1d6cd3",
+      "title": "",
+      "fullFile": "cypress/integration/demoblaze.e2e.js",
+      "file": "cypress/integration/demoblaze.e2e.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "88e7804e-110c-4dd5-922c-744dfdf3c232",
+          "title": "Add To Cart",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Add product to cart",
+              "fullTitle": "Add To Cart Add product to cart",
+              "timedOut": null,
+              "duration": 13000,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// If more time I would have added a command which makes sure cart is empty here.\nconst name = \"Edward Pasfield\";\nconst country = \"England\";\nconst city = \"Bath\";\nconst card = \"1234 1234 1234 1234\";\nconst month = \"June\";\nconst year = \"2021\"; // Assert Side Navigation Works\ncy.get(\".list-group-item\").contains(\"Laptop\").click(); // Find and visit Sony Vaio i7 Page and add to cart\ncy.get(\".card-title\").contains(\"Sony vaio i7\").click();\ncy.wait(\"@productPageLoad\");\ncy.get(\".btn:visible\").contains(\"Add to cart\").click(); // Go back home\ncy.get(\"#navbarExample\").contains(\"Home\").click();\ncy.wait([\"@productLoad\", \"@productLoad\", \"@productLoad\"]); // Click next page button\ncy.get(\"#next2\").should(\"be.visible\").click();\ncy.wait(\"@paginationLoad\"); // Find and visit ASUS Full HD Page and add to cart\ncy.get(\".card-title\").contains(\"ASUS Full HD\").click();\ncy.wait(\"@productPageLoad\");\ncy.get(\".btn:visible\").contains(\"Add to cart\").click(); // Visit Cart\ncy.get(\"#cartur\").click();\ncy.wait([\"@productPageLoad\", \"@productPageLoad\"]);\ncy.get(\"#totalp\").then(price => {\n  const val = price.text();\n  cy.log(\"val\"); // Click Place Order\n  cy.get(\".col-lg-1 > .btn\").click(); // Enter information (There is no validation on these fields)\n  cy.get(\"#name\").type(name);\n  cy.get(\"#country\").type(country);\n  cy.get(\"#city\").type(city);\n  cy.get(\"#card\").type(card);\n  cy.get(\"#month\").type(month);\n  cy.get(\"#year\").type(year);\n  cy.get(\"#orderModal .btn-primary\").click(); // Assert order placed correctly\n  cy.get(\".sweet-alert\").should(\"be.visible\") // Asserts name, card number and total price is correct.\n  .contains(name).contains(card).contains(val);\n  cy.wait(\"@deleteCart\");\n  cy.get(\".sa-success\"); // eslint-disable-next-line cypress/no-unnecessary-waiting\n  // Bad practice however the modal is very tempramental (as are all the modals tbh)\n  cy.wait(1000);\n  cy.get(\".confirm\").click();\n}); // Assert Home page load\ncy.get(\"#narvbarx\").should(\"be.visible\");",
+              "err": {},
+              "uuid": "081d79f5-acc4-4042-b3dc-73444f378185",
+              "parentUUID": "88e7804e-110c-4dd5-922c-744dfdf3c232",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "081d79f5-acc4-4042-b3dc-73444f378185"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 13000,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.0.0"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "showPassed": true,
+        "reportTitle": "AQA-Report"
+      },
+      "version": "6.0.0"
+    }
+  }
+}
